@@ -1,3 +1,4 @@
+Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
 # -*- coding: utf-8 -*-
 """
 A Kodi-agnostic library for Viaplay
@@ -377,8 +378,9 @@ class Viaplay(object):
 
         url = data['cseReporting']['link']['reportingUrl']['href']
 
+        profile_id = self.get_setting('profileid') or self.get_user_id()['id']
         params = {
-            'profileId': self.get_setting('profileid'),
+            'profileId': profile_id,
         }
 
         for a in data['cseReporting']['data']['reportAction']:
@@ -388,7 +390,7 @@ class Viaplay(object):
         json_data = {
             'bitrate': 10000,
             'clientVersion': '1.1.1-657ada7f80f',
-            'deltaTime': data['duration'],
+            'deltaTime': max(1, data['duration']),
             'correlationId': correlation_id,
             'sequenceNumber': 1,
             'actionType': action,
@@ -643,3 +645,4 @@ class Viaplay(object):
         local_dt = datetime.fromtimestamp(timestamp)
         assert utc_dt.resolution >= timedelta(microseconds=1)
         return local_dt.replace(microsecond=utc_dt.microsecond)
+
