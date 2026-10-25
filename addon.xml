@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.viaplay" version="2.4.6-beta.3" name="Viaplay" provider-name="mariusz89b, emilsvennesson, heppen-dev">
+<addon id="plugin.video.viaplay" version="2.4.6-beta.4" name="Viaplay" provider-name="mariusz89b, emilsvennesson, heppen-dev, IkHadHonger">
   <requires>
     <import addon="script.module.requests" version="2.9.1" />
     <import addon="script.module.iso8601" version="0.1.11" />
@@ -23,8 +23,15 @@
 	<language>da en fi nb nl sv pl lt</language>
     <platform>all</platform>
     <license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 and MIT LICENSE.</license>
-    <source>https://github.com/Mariusz89B/plugin.video.viaplay</source>
-    <news>v2.4.6 (2023-04-17)
+    <source>https://github.com/IkHadHonger/plugin.video.viaplay</source>
+    <news>v2.4.6-beta.4 (2026-10-25)
+- Added Kodi 22 Piers / MyVideos149 support.
+- Fixed Kodi 21 database selection.
+- Log unexpected errors instead of hiding them.
+- Skip malformed or unsupported products without failing the complete directory.
+- Added the missing profile ID setting.
+
+v2.4.6 (2023-04-17)
 - Fixed live channels.
 
 v2.4.5 (2023-04-17)
