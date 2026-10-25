@@ -71,6 +71,12 @@
 					<visible>false</visible>
 					<control type="toggle"/>
 				</setting>
+				<setting help="" id="profileid" type="string">
+					<level>0</level>
+					<default/>
+					<visible>false</visible>
+					<control format="string" type="edit"/>
+				</setting>
 			</group>
 		</category>
 		<category id="build_m3u" label="30057" help="">
