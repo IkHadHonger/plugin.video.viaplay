@@ -375,20 +375,17 @@ class KodiHelper(object):
                 playitem.setProperty('inputstreamaddon', 'inputstream.adaptive')
             playitem.setProperty('inputstream.adaptive.manifest_type', 'mpd')
             playitem.setProperty('inputstream.adaptive.manifest_update_parameter', 'full')
-            license_url = stream['license_url']
-            if '{widevineChallenge}' in license_url:
-                license_key = license_url.replace('{widevineChallenge}', 'B{SSM}') + '|||JBlicense'
-            else:
-                # The current Viaplay endpoint expects the binary Widevine
-                # challenge as the POST body and returns a raw license.
-                license_key = license_url + '|Content-Type=application%2Foctet-stream|R{SSM}|'
-
             kodi_major = int(xbmc.getInfoLabel('System.BuildVersion').split('.')[0])
             if kodi_major >= 22:
+                # drm_legacy accepts only key system, URL and headers. ISA sends
+                # the raw Widevine challenge and consumes the raw response.
                 playitem.setProperty(
                     'inputstream.adaptive.drm_legacy',
-                    'com.widevine.alpha|' + license_key)
+                    'com.widevine.alpha|{0}|Content-Type=application%2Foctet-stream'.format(
+                        stream['license_url']))
             else:
+                license_key = stream['license_url'].replace(
+                    '{widevineChallenge}', 'B{SSM}') + '|||JBlicense'
                 playitem.setProperty('inputstream.adaptive.license_type', 'com.widevine.alpha')
                 playitem.setProperty('inputstream.adaptive.license_key', license_key)
             if self.get_setting('subtitles') and 'subtitles' in stream:
